@@ -1,7 +1,7 @@
 'use strict'
 
 const messages = {
-  default: (name) => {
+  default: name => {
     return `
       Ciao ${name}, sono Ragusa Bot. Posso fornirti le ultimissime notizie sulla provincia di Ragusa.
       Puoi chiedermi di cronaca, cultura, sport, attualità e politica.

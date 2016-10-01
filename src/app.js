@@ -3,7 +3,7 @@ const {
   bot
 } = require('./config.js')
 
-const {user} = require('./models.js')
+// const {user} = require('./models.js')
 const {messages} = require('./utils.js')
 
 //  =========================================================
@@ -18,7 +18,11 @@ bot.dialog('/', intents)
   */
 intents.onDefault([
   (session, args, next) => {
-    session.userData.firstResponse ? next() : session.beginDialog('/returnUser')
+    if (session.userData.firstResponse) {
+      next()
+    } else {
+      session.beginDialog('/returnUser')
+    }
   },
   session => {
     session.send(messages.default(session.userData.firstResponse))
