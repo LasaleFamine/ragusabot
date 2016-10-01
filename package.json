@@ -1,0 +1,39 @@
+{
+  "name": "ragusabot",
+  "version": "0.0.1",
+  "description": "A Telegram and Facebook bot for getting the latest news of Ragusa",
+  "main": "src/app.js",
+  "engines": {
+    "node": "6.2.0"
+  },
+  "xo": {
+    "esnext": true,
+    "semicolon": false,
+    "space": 2
+  },
+  "scripts": {
+    "start": "cd src && node app.js",
+    "test": "xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lasalefamine/ragusabot.git"
+  },
+  "keywords": [
+    "bot",
+    "ragusa",
+    "news"
+  ],
+  "author": "LasaleFamine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lasalefamine/ragusabot/issues"
+  },
+  "homepage": "https://github.com/lasalefamine/ragusabot#readme",
+  "dependencies": {
+    "botbuilder": "^3.2.3"
+  },
+  "devDependencies": {
+    "xo": "^0.16.0"
+  }
+}
