@@ -31,7 +31,8 @@
   },
   "homepage": "https://github.com/lasalefamine/ragusabot#readme",
   "dependencies": {
-    "botbuilder": "^3.2.3"
+    "botbuilder": "^3.2.3",
+    "restify": "^4.1.1"
   },
   "devDependencies": {
     "xo": "^0.16.0"
