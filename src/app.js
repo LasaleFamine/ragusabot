@@ -80,8 +80,8 @@ bot.dialog('/returnUser', [
 ])
 
 bot.dialog('/news', [
-  session.sendTyping()
   (session, category) => {
+    session.sendTyping()
     const urls = utils.getUrls(category)
     const promise = new Promise(resolve => {
       let msgs = []
