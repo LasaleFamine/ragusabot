@@ -80,6 +80,7 @@ bot.dialog('/returnUser', [
 ])
 
 bot.dialog('/news', [
+  session.sendTyping()
   (session, category) => {
     const urls = utils.getUrls(category)
     const promise = new Promise(resolve => {
