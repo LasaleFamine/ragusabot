@@ -14,7 +14,9 @@ bot.dialog('/', intents)
 
 const handleResFeed = (session, results) => {
   results.response.forEach(res => {
-    session.send(res)
+    const replyMessage = new builder.Message(session)
+      .text(res)
+    session.send(replyMessage)
   })
 }
 
