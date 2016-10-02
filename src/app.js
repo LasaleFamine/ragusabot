@@ -53,28 +53,37 @@ bot.dialog('/news', [
   (session, category) => {
     const urls = utils.getUrls(category)
     const promise = new Promise(resolve => {
-      let cards = []
+      let msgs = []
+
       urls.map(url => {
         return utils.getSingleFeedFromUrl(url, feed => {
-          const msg = new builder.Message(session)
-            .textFormat(builder.TextFormat.xml)
-            .attachments([
-              new builder.ThumbnailCard(session)
-                .title(feed.title)
-                .text(feed.content)
-                .tap(builder.CardAction.openUrl(session, feed.link))
-            ])
-          cards = cards.concat(msg)
-          if (cards.length === urls.length) {
-            return resolve(cards)
+          const msg = `
+${feed.title}
+${feed.link}
+          `
+          msgs = msgs.concat(msg)
+          if (msgs.length === urls.length) {
+            return resolve(msgs)
           }
+          // const msg = new builder.Message(session)
+          //   .textFormat(builder.TextFormat.xml)
+          //   .attachments([
+          //     new builder.ThumbnailCard(session)
+          //       .title(feed.title)
+          //       .text(feed.content)
+          //       .tap(builder.CardAction.openUrl(session, feed.link))
+          //   ])
+          // cards = cards.concat(msg)
+          // if (cards.length === urls.length) {
+          //   return resolve(cards)
+          // }
         })
       })
     })
-    promise.then(cards => {
-      session.dialogData.cards = cards
+    promise.then(msgs => {
+      session.dialogData.msgs = msgs
       session.endDialogWithResult({
-        response: session.dialogData.cards
+        response: session.dialogData.msgs
       })
     })
   }
