@@ -39,7 +39,6 @@ const utils = {
       resource: {longUrl: url},
       key: process.env.GOOGLE_SHORTNER_KEY
     }
-
     return new Promise((resolve, reject) => {
       urlshortener.url.insert(params, (err, response) => {
         if (err) {
@@ -51,6 +50,17 @@ const utils = {
         }
       })
     })
+  },
+  computeMessage: (feed, shortLink, source) => {
+    let msg = `${shortLink}`
+    if (source === 'facebook') {
+      msg =
+`
+${feed.title}
+${shortLink}
+`
+    }
+    return msg
   }
 }
 

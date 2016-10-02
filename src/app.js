@@ -92,10 +92,7 @@ bot.dialog('/news', [
         return utils.getSingleFeedFromUrl(url, feed => {
           return utils.shortUrl(feed.link)
             .then(shortLink => {
-              const msg = `
-              ${session.message.source === 'facebook' ? feed.title : ''}
-              ${shortLink}
-              `
+              const msg = utils.computeMessage(feed, shortLink, session.message.source)
               msgs = msgs.concat(msg)
               if (msgs.length === urls.length) {
                 return resolve(msgs)
