@@ -8,7 +8,7 @@ const restify = require('restify')
 //  Bot Setup
 //  =========================================================
 
-// Setup Restify Server
+//  Setup Restify Server
 const server = restify.createServer()
 server.listen(process.env.port || process.env.PORT || 8080, () => {
   console.log(`${server.name} listening to ${server.url}`)
