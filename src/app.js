@@ -1,10 +1,7 @@
-const {
-  builder,
-  bot
-} = require('./config.js')
+const {builder, bot} = require('./config.js')
 
 // const {user} = require('./models.js')
-const {messages} = require('./utils.js')
+const {messages, utils} = require('./utils.js')
 
 //  =========================================================
 //  Bots Dialogs
@@ -13,9 +10,21 @@ const {messages} = require('./utils.js')
 const intents = new builder.IntentDialog()
 bot.dialog('/', intents)
 
+// === INTENTS
+
+intents.matches(/cronaca/i, [
+  session => {
+    session.beginDialog('/news', 'cronaca')
+  },
+  (session, results) => {
+    session.send(results.response[0])
+    session.send(results.response[1])
+  }
+])
+
 /**
-  * On default intent
-  */
+ * On default intent
+ */
 intents.onDefault([
   (session, args, next) => {
     if (session.userData.firstResponse) {
@@ -25,17 +34,52 @@ intents.onDefault([
     }
   },
   session => {
-    session.send(messages.default(session.userData.firstResponse))
+    session.send(messages.default())
   }
 ])
 
 // --- Dialogs --- //
 bot.dialog('/returnUser', [
   session => {
-    builder.Prompts.text(session, 'Ciao! Come ti chiami?')
+    builder.Prompts.text(session, 'Ciao! Piacere, sono Ragusa Bot.')
   },
   (session, results) => {
     session.userData.firstResponse = results.response
     session.endDialog()
+  }
+])
+
+bot.dialog('/news', [
+  (session, category) => {
+    const urls = utils.getUrls(category)
+    const promise = new Promise(resolve => {
+      let cards = []
+      urls.map(url => {
+        return utils.getSingleFeedFromUrl(url, feed => {
+          const msg = new builder.Message(session)
+            .textFormat(builder.TextFormat.xml)
+            .attachments([
+              new builder.HeroCard(session)
+                .title(feed.title)
+                .subtitle(feed.title)
+                .text(feed.content)
+                .images([
+                  builder.CardImage.create(session, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/320px-Seattlenighttimequeenanne.jpg')
+                ])
+                .tap(builder.CardAction.openUrl(session, 'https://en.wikipedia.org/wiki/Space_Needle'))
+            ])
+          cards = cards.concat(msg)
+          if (cards.length === urls.length) {
+            return resolve(cards)
+          }
+        })
+      })
+    })
+    promise.then(cards => {
+      session.dialogData.cards = cards
+      session.endDialogWithResult({
+        response: session.dialogData.cards
+      })
+    })
   }
 ])

@@ -1,6 +1,6 @@
 {
   "name": "ragusabot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Telegram and Facebook bot for getting the latest news of Ragusa",
   "main": "src/app.js",
   "engines": {
@@ -32,7 +32,9 @@
   "homepage": "https://github.com/lasalefamine/ragusabot#readme",
   "dependencies": {
     "botbuilder": "^3.2.3",
-    "restify": "^4.1.1"
+    "feed-read": "0.0.1",
+    "restify": "^4.1.1",
+    "striptags": "^2.1.1"
   },
   "devDependencies": {
     "xo": "^0.16.0"

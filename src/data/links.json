@@ -1,0 +1,26 @@
+{
+  "attualita": [
+    "http://www.ragusah24.it/argomenti/attualita/feed/",
+    "http://www.corrierediragusa.it/rss/categoria/attualit%E0/",
+    "http://reteiblea.it/category/news/attualita/feed/"
+  ],
+  "cronaca": [
+    "http://www.corrierediragusa.it/rss/categoria/cronache/",
+    "http://reteiblea.it/category/news/cronaca/feed/"
+  ],
+  "cultura": [
+    "http://www.ragusah24.it/argomenti/cultura/feed/",
+    "http://www.corrierediragusa.it/rss/categoria/cultura/",
+    "http://reteiblea.it/category/news/cultura/feed/"
+  ],
+  "politica": [
+    "http://www.ragusah24.it/argomenti/politica/feed/",
+    "http://www.corrierediragusa.it/rss/categoria/politica/",
+    "http://reteiblea.it/category/news/attualita/politica/"
+  ],
+  "sport": [
+    "http://www.ragusah24.it/argomenti/sport/feed/",
+    "http://www.corrierediragusa.it/rss/categoria/sport/",
+    "http://reteiblea.it/category/news/sport/feed/"
+  ]
+}
