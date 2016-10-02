@@ -1,6 +1,6 @@
 'use strict'
 
-//  require('dotenv').config()
+require('dotenv').config()
 const builder = require('botbuilder')
 const restify = require('restify')
 

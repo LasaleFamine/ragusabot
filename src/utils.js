@@ -2,6 +2,7 @@
 
 const feed = require('feed-read')
 const strip = require('striptags')
+const google = require('googleapis')
 
 const {Feed} = require('./models.js')
 
@@ -30,6 +31,25 @@ const utils = {
       const article = articles[0]
       article.content = strip(article.content)
       cb(new Feed(article))
+    })
+  },
+  shortUrl: url => {
+    const urlshortener = google.urlshortener('v1')
+    const params = {
+      resource: {longUrl: url},
+      key: process.env.GOOGLE_SHORTNER_KEY
+    }
+
+    return new Promise((resolve, reject) => {
+      urlshortener.url.insert(params, (err, response) => {
+        if (err) {
+          console.log('Encountered error', err)
+          reject(err)
+        } else {
+          console.log('Short url is', response.id)
+          resolve(response.id)
+        }
+      })
     })
   }
 }

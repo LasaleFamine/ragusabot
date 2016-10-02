@@ -12,13 +12,43 @@ bot.dialog('/', intents)
 
 // === INTENTS
 
+const handleResFeed = (session, results) => {
+  results.response.forEach(res => {
+    session.send(res)
+  })
+}
+
 intents.matches(/cronaca/i, [
   session => {
     session.beginDialog('/news', 'cronaca')
   },
-  (session, results) => {
-    session.send(results.response[0])
-    session.send(results.response[1])
+  handleResFeed
+])
+
+intents.matches(/cultura/i, [
+  session => {
+    session.beginDialog('/news', 'cultura')
+  },
+  handleResFeed
+])
+
+intents.matches(/attualità/i, [
+  session => {
+    session.beginDialog('/news', 'attualita')
+  },
+  handleResFeed
+])
+
+intents.matches(/sport/i, [
+  session => {
+    session.beginDialog('/news', 'sport')
+  },
+  handleResFeed
+])
+
+intents.matches(/^rick/i, [
+  session => {
+    session.send('https://goo.gl/SstJsZ')
   }
 ])
 
@@ -54,29 +84,19 @@ bot.dialog('/news', [
     const urls = utils.getUrls(category)
     const promise = new Promise(resolve => {
       let msgs = []
-
       urls.map(url => {
         return utils.getSingleFeedFromUrl(url, feed => {
-          const msg = `
-${feed.title}
-${feed.link}
-          `
-          msgs = msgs.concat(msg)
-          if (msgs.length === urls.length) {
-            return resolve(msgs)
-          }
-          // const msg = new builder.Message(session)
-          //   .textFormat(builder.TextFormat.xml)
-          //   .attachments([
-          //     new builder.ThumbnailCard(session)
-          //       .title(feed.title)
-          //       .text(feed.content)
-          //       .tap(builder.CardAction.openUrl(session, feed.link))
-          //   ])
-          // cards = cards.concat(msg)
-          // if (cards.length === urls.length) {
-          //   return resolve(cards)
-          // }
+          return utils.shortUrl(feed.link)
+            .then(shortLink => {
+              const msg = `${shortLink}`
+              msgs = msgs.concat(msg)
+              if (msgs.length === urls.length) {
+                return resolve(msgs)
+              }
+            })
+            .catch(err => {
+              console.log(err)
+            })
         })
       })
     })

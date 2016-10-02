@@ -33,10 +33,12 @@
   "dependencies": {
     "botbuilder": "^3.2.3",
     "feed-read": "0.0.1",
+    "googleapis": "^13.0.0",
     "restify": "^4.1.1",
     "striptags": "^2.1.1"
   },
   "devDependencies": {
+    "dotenv": "^2.0.0",
     "xo": "^0.16.0"
   }
 }
