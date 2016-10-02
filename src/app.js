@@ -55,6 +55,20 @@ intents.matches(/^rick/i, [
   }
 ])
 
+intents.matches(/^cam/i, [
+  session => {
+    session.beginDialog('/cam')
+  },
+  (session, results) => {
+    const msg = new builder.Message(session)
+    .attachments([{
+      contentType: 'image/jpeg',
+      contentUrl: results.response
+    }])
+    session.send(msg)
+  }
+])
+
 /**
  * On default intent
  */
@@ -109,6 +123,18 @@ bot.dialog('/news', [
       session.endDialogWithResult({
         response: session.dialogData.msgs
       })
+    })
+  }
+])
+
+bot.dialog('/cam', [
+  session => {
+    const dateNow = new Date()
+    const urlImage = 'http://www.comune.ragusa.gov.it/turismo/webcam/_immagini/porto.jpg?tm=' + encodeURIComponent(dateNow)
+    console.log(urlImage)
+    session.dialogData.urlImage = urlImage
+    session.endDialogWithResult({
+      response: session.dialogData.urlImage
     })
   }
 ])
