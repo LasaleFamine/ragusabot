@@ -13,6 +13,7 @@ bot.dialog('/', intents)
 // === INTENTS
 
 const handleResFeed = (session, results) => {
+  console.log(session.message.source)
   results.response.forEach(res => {
     const replyMessage = new builder.Message(session)
       .text(res)
@@ -91,7 +92,10 @@ bot.dialog('/news', [
         return utils.getSingleFeedFromUrl(url, feed => {
           return utils.shortUrl(feed.link)
             .then(shortLink => {
-              const msg = `${shortLink}`
+              const msg = `
+              ${session.message.source === 'facebook' ? feed.title : ''}
+              ${shortLink}
+              `
               msgs = msgs.concat(msg)
               if (msgs.length === urls.length) {
                 return resolve(msgs)
