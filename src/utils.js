@@ -50,16 +50,11 @@ const utils = {
       })
     })
   },
-  computeMessage: (feed, shortLink, source) => {
-    let msg = `${shortLink}`
-    if (source === 'facebook') {
-      msg =
-`
-${feed.title}
-${shortLink}
-`
-    }
-    return msg
+  computeMessage: (feed, shortLink) => {
+    return `
+    ${feed.title}
+    ${shortLink}
+    `
   }
 }
 
