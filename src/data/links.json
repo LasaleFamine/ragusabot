@@ -1,22 +1,27 @@
 {
   "attualita": [
     "http://www.corrierediragusa.it/rss/categoria/attualit%E0/",
-    "http://reteiblea.it/category/news/attualita/feed/"
+    "http://reteiblea.it/category/news/attualita/feed/",
+    "http://www.radiortm.it/category/attualita/feed/"
   ],
   "cronaca": [
     "http://www.corrierediragusa.it/rss/categoria/cronache/",
-    "http://reteiblea.it/category/news/cronaca/feed/"
+    "http://reteiblea.it/category/news/cronaca/feed/",
+    "http://www.radiortm.it/category/cronaca/feed/"
   ],
   "cultura": [
     "http://www.corrierediragusa.it/rss/categoria/cultura/",
-    "http://reteiblea.it/category/news/cultura/feed/"
+    "http://reteiblea.it/category/news/cultura/feed/",
+    "http://www.radiortm.it/category/cultura/feed/"
   ],
   "politica": [
     "http://www.corrierediragusa.it/rss/categoria/politica/",
-    "http://reteiblea.it/category/news/attualita/politica/"
+    "http://reteiblea.it/category/news/attualita/politica/",
+    "http://www.radiortm.it/category/politica/feed/"
   ],
   "sport": [
     "http://www.corrierediragusa.it/rss/categoria/sport/",
-    "http://reteiblea.it/category/news/sport/feed/"
+    "http://reteiblea.it/category/news/sport/feed/",
+    "http://www.radiortm.it/category/sport/feed/"
   ]
 }
