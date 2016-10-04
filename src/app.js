@@ -88,7 +88,7 @@ intents.onDefault([
 // --- Dialogs --- //
 bot.dialog('/returnUser', [
   session => {
-    builder.Prompts.text(session, 'Ciao! Piacere, sono Ragusa Bot.')
+    builder.Prompts.text(session, 'Ciao! Piacere, sono Ragusa Bot. Inviami un messaggio.')
   },
   (session, results) => {
     session.userData.firstResponse = results.response
@@ -106,7 +106,7 @@ bot.dialog('/news', [
         return utils.getSingleFeedFromUrl(url, feed => {
           return utils.shortUrl(feed.link)
             .then(shortLink => {
-              const msg = utils.computeMessage(feed, shortLink, session.message.source)
+              const msg = utils.computeMessage(feed, shortLink)
               msgs = msgs.concat(msg)
               if (msgs.length === urls.length) {
                 return resolve(msgs)
