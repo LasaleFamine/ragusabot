@@ -52,8 +52,8 @@ const utils = {
   },
   computeMessage: (feed, shortLink) => {
     return `
-    ${feed.title}
-    ${shortLink}
+${feed.title}
+${shortLink}
     `
   }
 }
