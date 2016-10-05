@@ -11,12 +11,14 @@
 
 [![Build Status](https://travis-ci.com/LasaleFamine/ragusabot.svg?token=RmWdev7p6ZX1E14v2rQp&branch=master)](https://travis-ci.org/lasalefamine/ragusabot)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/lasalefamine/ragusabot)
+[![GitHub version](https://badge.fury.io/gh/LasaleFamine%2Fragusabot.svg)](https://badge.fury.io/gh/LasaleFamine%2Fragusabot)
+[![Dependency Status](https://gemnasium.com/badges/github.com/LasaleFamine/ragusabot.svg)](https://gemnasium.com/github.com/LasaleFamine/ragusabot)
 
 > Built on top of [Bot Framework V3 (NodeJs)](https://github.com/Microsoft/BotBuilder)
 
 
-Ragusa Bot is a Facebook and Telegram bot that lets you get when you want the latest news of the province of Ragusa.  
-You can ask for the daily news, politics, current events, sports, etc. directly by sending a message on the Facebook page or through Telegram.  
+**Ragusa Bot** is a **Facebook Messenger** and **Telegram** bot that lets you get when you want the latest news of the province of Ragusa.  
+You can ask for the **daily news, politics, current events, sports, etc.** directly by sending a message on the Facebook page or through Telegram.  
 Of course everything needs to be ask in italian :it: Try now!
 
 <p align="center">
