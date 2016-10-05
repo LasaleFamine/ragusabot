@@ -105,7 +105,7 @@ bot.dialog('/news', [
     }
     const promise = new Promise(resolve => {
       let msgs = []
-      return urls.map(url => {
+      urls.map(url => {
         return utils.getSingleFeedFromUrl(url, feed => {
           return utils.shortUrl(feed.link)
             .then(shortLink => {
@@ -118,9 +118,6 @@ bot.dialog('/news', [
             .catch(err => {
               console.log(err)
             })
-        })
-        .catch(err => {
-          console.log(err)
         })
       })
     })
