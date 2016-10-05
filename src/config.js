@@ -12,8 +12,8 @@ const restify = require('restify')
 const server = restify.createServer()
 server.listen(process.env.port || process.env.PORT || 8080, () => {
   console.log(`${server.name} listening to ${server.url}`)
-  console.log("MS", process.env.MICROSOFT_APP_ID)
-  console.log("GO", process.env.GOOGLE_SHORTNER_KEY)
+  console.log('MS', process.env.MICROSOFT_APP_ID)
+  console.log('GO', process.env.GOOGLE_SHORTNER_KEY)
 })
 
 const connector = new builder.ChatConnector({
