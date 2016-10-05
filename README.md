@@ -17,12 +17,16 @@
 ## What
 
 Ragusa Bot is a Facebook and Telegram bot that lets you get when you want the latest news of the province of Ragusa.  
-You can ask for the daily news, politics, current events, sports, etc. directly by sending a message on the Facebook page or through Telegram. Of course everything needs to be ask in italian :it:  
-Try now!
+You can ask for the daily news, politics, current events, sports, etc. directly by sending a message on the Facebook page or through Telegram.  
+Of course everything needs to be ask in italian :it: Try now!
 
-<p aling="center">
-[![Fb](assets/Facebook_Messenger.png)](http://m.me/ragusabot)
-[![Telegram](assets/Telegram.png)](https://telegram.me/ragusabot)
+<p align="center">
+<a href="http://m.me/ragusabot">
+  <img src="assets/Facebook_Messenger.png" alt="Ragusa Bot Messenger"/>
+</a>
+<a href="https://telegram.me/ragusabot">
+  <img src="assets/Telegram.png" alt="Ragusa Bot"/>
+</a>
 </p>
 
 
