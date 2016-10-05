@@ -49,13 +49,13 @@ intents.matches(/sport/i, [
   handleResFeed
 ])
 
-intents.matches(/^rick/i, [
+intents.matches(/rick/i, [
   session => {
     session.send('https://goo.gl/SstJsZ')
   }
 ])
 
-intents.matches(/^cam/i, [
+intents.matches(/cam/i, [
   session => {
     session.beginDialog('/cam')
   },
