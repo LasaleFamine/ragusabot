@@ -1,4 +1,4 @@
-# Ragusa Bot | Your best news reporter of Ragusa and province
+# Ragusa Bot | Your best news reporter of Ragusa
 
 
 <p align="center">
@@ -20,8 +20,11 @@ Ragusa Bot is a Facebook and Telegram bot that lets you get when you want the la
 You can ask for the daily news, politics, current events, sports, etc. directly by sending a message on the Facebook page or through Telegram. Of course everything needs to be ask in italian :it:  
 Try now!
 
+<p aling="center">
 [![Fb](assets/Facebook_Messenger.png)](http://m.me/ragusabot)
 [![Telegram](assets/Telegram.png)](https://telegram.me/ragusabot)
+</p>
+
 
 ## Mission
 Give opportunities to all citizens of the province of Ragusa to stay up-to-date and read local news quickly and easily directly on the smartphone.
@@ -37,7 +40,7 @@ Built with the [Bot Framework V3]() and so written in NodeJs. I used the ES6 syn
 
 ### Run in DEV mode
 
-#### [ngrok](https://ngrok.com/)
+#### - [ngrok](https://ngrok.com/)
 
 You can use [***ngrok***](https://ngrok.com/) to run in testing mode the application and make it available to the Microsoft Bot Builder service.  
 If you are not familiar with the Bot Framework I have made a "learning" repository for it: [learning-ms-bot-builder](https://github.com/LasaleFamine/learning-ms-bot-builder)
@@ -60,15 +63,34 @@ GOOGLE_SHORTNER_KEY={KEY}
 MICROSOFT_APP_ID={KEY}
 MICROSOFT_APP_PASSWORD={KEY}
 ```
+> The bot uses the [Google Apis Nodejs Client](https://github.com/google/google-api-nodejs-client) and [Google Shortner API](https://developers.google.com/url-shortener/v1/getting_started), so you need an ***API KEY*** to make a lot of requests, but the bot will work at the beginning also without the KEY.
 
-#### `ConsoleConnector`
+#### - `ConsoleConnector`
+
+If you want to try the bot directly inside the console you can simply modify the `config.js`:
+
+``` js
+'use strict'
+
+// require('dotenv').config()
+const builder = require('botbuilder')
+
+//  =========================================================
+//  Bot Setup
+//  =========================================================
+
+const connector = new builder.ConsoleConnector().listen()
+
+const bot = new builder.UniversalBot(connector)
+
+module.exports = {builder, bot}
+
+```
+
+> If you want you can use also here the Google API KEY for the Shortner API.
 
 ### Test
 
 > Currently only [xo]()
 
     $ npm test
-
-## TODO
-
-- TESTs
