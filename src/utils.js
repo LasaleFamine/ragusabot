@@ -20,7 +20,7 @@ Scrivi "cam" per l'immagine live della cam di Marina di Ragusa.
 
 const utils = {
   getUrls: category => {
-    return links[category]
+    return links[category] ? links[category] : []
   },
   getSingleFeedFromUrl: (url, cb) => {
     feed(url, (err, articles) => {
