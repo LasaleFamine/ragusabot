@@ -14,7 +14,6 @@
 
 > Built on top of [Bot Framework V3 (NodeJs)](https://github.com/Microsoft/BotBuilder)
 
-## What
 
 Ragusa Bot is a Facebook and Telegram bot that lets you get when you want the latest news of the province of Ragusa.  
 You can ask for the daily news, politics, current events, sports, etc. directly by sending a message on the Facebook page or through Telegram.  
@@ -98,3 +97,7 @@ module.exports = {builder, bot}
 > Currently only [xo]()
 
     $ npm test
+
+## License
+
+[MIT](https://github.com/LasaleFamine/ragusabot/blob/master/LICENSE.md) &copy; LasaleFamine
