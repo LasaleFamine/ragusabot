@@ -49,6 +49,13 @@ intents.matches(/sport/i, [
   handleResFeed
 ])
 
+intents.matches(/digest/i, [
+  session => {
+    session.beginDialog('/digest')
+  },
+  handleResFeed
+])
+
 intents.matches(/rick/i, [
   session => {
     session.send('https://goo.gl/SstJsZ')
@@ -103,25 +110,8 @@ bot.dialog('/news', [
     if (urls.length === 0) {
       return session.endDialog()
     }
-    const promise = new Promise(resolve => {
-      let msgs = []
-      urls.map(url => {
-        return utils.getSingleFeedFromUrl(url, feed => {
-          return utils.shortUrl(feed.link)
-            .then(shortLink => {
-              const msg = utils.computeMessage(feed, shortLink)
-              msgs = msgs.concat(msg)
-              if (msgs.length === urls.length) {
-                return resolve(msgs)
-              }
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        })
-      })
-    })
-    promise.then(msgs => {
+
+    utils.getMessagesFromFeed(urls).then(msgs => {
       session.dialogData.msgs = msgs
       session.endDialogWithResult({
         response: session.dialogData.msgs
@@ -138,6 +128,20 @@ bot.dialog('/cam', [
     session.dialogData.urlImage = urlImage
     session.endDialogWithResult({
       response: session.dialogData.urlImage
+    })
+  }
+])
+
+/**
+  * Google news
+  */
+bot.dialog('/digest', [
+  session => {
+    utils.getMessagesFromFeed(['http://news.google.it/news?cf=all&hl=it&pz=1&ned=it&geo=Ragusa&output=rss']).then(msgs => {
+      session.dialogData.msgs = msgs
+      session.endDialogWithResult({
+        response: session.dialogData.msgs
+      })
     })
   }
 ])
