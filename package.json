@@ -1,6 +1,6 @@
 {
   "name": "ragusabot",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A Telegram and Facebook bot for getting the latest news of Ragusa",
   "main": "src/app.js",
   "engines": {
