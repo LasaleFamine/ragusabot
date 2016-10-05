@@ -100,6 +100,9 @@ bot.dialog('/news', [
   (session, category) => {
     session.sendTyping()
     const urls = utils.getUrls(category)
+    if(urls.length) {
+      return session.endDialog()
+    }
     const promise = new Promise(resolve => {
       let msgs = []
       urls.map(url => {
