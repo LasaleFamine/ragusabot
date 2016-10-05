@@ -100,12 +100,12 @@ bot.dialog('/news', [
   (session, category) => {
     session.sendTyping()
     const urls = utils.getUrls(category)
-    if (urls.length && urls.length > 0) {
+    if(urls.length === 0) {
       return session.endDialog()
     }
     const promise = new Promise(resolve => {
       let msgs = []
-      urls.map(url => {
+      return urls.map(url => {
         return utils.getSingleFeedFromUrl(url, feed => {
           return utils.shortUrl(feed.link)
             .then(shortLink => {
