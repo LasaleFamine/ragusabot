@@ -116,6 +116,9 @@ bot.dialog('/news', [
               console.log(err)
             })
         })
+        .catch(err => {
+          console.log(err)
+        })
       })
     })
     promise.then(msgs => {
