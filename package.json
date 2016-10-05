@@ -1,7 +1,7 @@
 {
   "name": "ragusabot",
-  "version": "0.0.8",
-  "description": "A Telegram and Facebook bot for getting the latest news of Ragusa",
+  "version": "1.0.1",
+  "description": "Telegram and Facebook bot for getting the latest news of Ragusa",
   "main": "src/app.js",
   "engines": {
     "node": "6.2.0"
@@ -34,7 +34,7 @@
     "botbuilder": "^3.2.3",
     "dropbox": "^2.3.0",
     "feed-read": "0.0.1",
-    "googleapis": "^13.0.0",
+    "googleapis": "^14.0.0",
     "restify": "^4.1.1",
     "striptags": "^2.1.1"
   },
