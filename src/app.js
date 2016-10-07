@@ -50,7 +50,7 @@ intents.matches(/sport/i, [
   handleResFeed
 ])
 
-intents.matches(/in evidenza/i, [
+intents.matches(/in[[:blank:]]evidenza/i, [
   session => {
     session.beginDialog('/topnews')
   },
