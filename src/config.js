@@ -25,6 +25,6 @@ const connector = new builder.ChatConnector({
 
 const bot = new builder.UniversalBot(connector)
 
-server.post('/api/messages', connector.listen())
+server.post('/bot/api/messages', connector.listen())
 
 module.exports = {builder, bot}

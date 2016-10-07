@@ -71,7 +71,7 @@ const utils = {
       let msgs = []
       urls.map(url => {
         return _getFeeds(url, limit, feeds => {
-          const msgs = feeds.map(feed => {
+          return feeds.map(feed => {
             return _shortUrl(feed.link)
               .then(shortLink => {
                 const msg = _computeMessage(feed, shortLink)
