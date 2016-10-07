@@ -49,11 +49,10 @@ intents.matches(/sport/i, [
   handleResFeed
 ])
 
-intents.matches(/digest/i, [
+intents.matches(/in evidenza/i, [
   session => {
-    session.beginDialog('/digest')
-  },
-  handleResFeed
+    session.beginDialog('/topnews')
+  }
 ])
 
 intents.matches(/rick/i, [
@@ -111,7 +110,7 @@ bot.dialog('/news', [
       return session.endDialog()
     }
 
-    utils.getMessagesFromFeed(urls).then(msgs => {
+    utils.getMessagesFromFeed(urls, 1).then(msgs => {
       session.dialogData.msgs = msgs
       session.endDialogWithResult({
         response: session.dialogData.msgs
@@ -135,9 +134,9 @@ bot.dialog('/cam', [
 /**
   * Google news
   */
-bot.dialog('/digest', [
+bot.dialog('/topnews', [
   session => {
-    utils.getMessagesFromFeed(['http://news.google.it/news?cf=all&hl=it&pz=1&ned=it&geo=Ragusa&output=rss']).then(msgs => {
+    utils.getMessagesFromFeed(['http://news.google.it/news?cf=all&hl=it&pz=1&ned=it&geo=Ragusa&output=rss'], 3).then(msgs => {
       session.dialogData.msgs = msgs
       session.endDialogWithResult({
         response: session.dialogData.msgs

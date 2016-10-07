@@ -66,11 +66,11 @@ ${shortLink}
 }
 
 const utils = {
-  getMessagesFromFeed: urls => {
+  getMessagesFromFeed: (urls, limit) => {
     return new Promise(resolve => {
       let msgs = []
       urls.map(url => {
-        return _getFeeds(url, 1, feeds => {
+        return _getFeeds(url, limit, feeds => {
           return feeds.map(feed => {
             return _shortUrl(feed.link)
               .then(shortLink => {
