@@ -13,7 +13,8 @@ bot.dialog('/', intents)
 // === INTENTS
 
 const handleResFeed = (session, results) => {
-  console.log(session.message.source)
+  console.log('Message source: ', session.message.source)
+  console.log('News found: ', results.response.length)
   results.response.forEach(res => {
     const replyMessage = new builder.Message(session)
       .text(res)
@@ -124,7 +125,6 @@ bot.dialog('/cam', [
   session => {
     const dateNow = new Date()
     const urlImage = 'http://www.comune.ragusa.gov.it/turismo/webcam/_immagini/porto.jpg?tm=' + encodeURIComponent(dateNow)
-    console.log(urlImage)
     session.dialogData.urlImage = urlImage
     session.endDialogWithResult({
       response: session.dialogData.urlImage
@@ -137,6 +137,7 @@ bot.dialog('/cam', [
   */
 bot.dialog('/topnews', [
   session => {
+    session.sendTyping()
     utils.getMessagesFromFeed(['http://news.google.it/news?cf=all&hl=it&pz=1&ned=it&geo=Ragusa&output=rss'], 3).then(msgs => {
       session.dialogData.msgs = msgs
       session.endDialogWithResult({

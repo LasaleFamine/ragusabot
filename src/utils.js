@@ -68,22 +68,24 @@ ${shortLink}
 const utils = {
   getMessagesFromFeed: (urls, limit) => {
     return new Promise(resolve => {
-      let msgs = []
+      // let msgs = []
       urls.map(url => {
         return _getFeeds(url, limit, feeds => {
-          return feeds.map(feed => {
+          const msgs = feeds.map(feed => {
             return _shortUrl(feed.link)
               .then(shortLink => {
                 const msg = _computeMessage(feed, shortLink)
-                msgs = msgs.concat(msg)
-                if (msgs.length === urls.length) {
-                  return resolve(msgs)
-                }
+                // msgs = msgs.concat(msg)
+                // if (msgs.length === urls.length) {
+                //   return resolve(msgs)
+                // }
+                return msg
               })
               .catch(err => {
-                console.log(err)
+                console.log('Error short url', err)
               })
           })
+          resolve(msgs)
         })
       })
     })
