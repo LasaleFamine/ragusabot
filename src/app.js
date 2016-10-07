@@ -52,7 +52,8 @@ intents.matches(/sport/i, [
 intents.matches(/in evidenza/i, [
   session => {
     session.beginDialog('/topnews')
-  }
+  },
+  handleResFeed
 ])
 
 intents.matches(/rick/i, [
