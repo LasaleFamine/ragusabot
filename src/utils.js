@@ -14,7 +14,7 @@ const messages = {
   default: () => {
     return `
 Posso fornirti le ultimissime notizie sulla provincia di Ragusa.
-Puoi chiedermi di cronaca, cultura, sport, attualità e politica.
+Puoi chiedermi di cronaca, cultura, sport, attualità e politica, oppure inviarmi il testo "in evidenza" per ricevere le notizie del momento.
 Scrivi "cam" per l'immagine live della cam di Marina di Ragusa.
     `
   }
