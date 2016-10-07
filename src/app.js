@@ -112,7 +112,7 @@ bot.dialog('/news', [
       return session.endDialog()
     }
 
-    utils.getMessagesFromFeed(urls, 1).then(msgs => {
+    utils.getMessagesFromFeed(urls, 1, 3).then(msgs => {
       session.dialogData.msgs = msgs
       session.endDialogWithResult({
         response: session.dialogData.msgs
@@ -138,7 +138,7 @@ bot.dialog('/cam', [
 bot.dialog('/topnews', [
   session => {
     session.sendTyping()
-    utils.getMessagesFromFeed(['http://news.google.it/news?cf=all&hl=it&pz=1&ned=it&geo=Ragusa&output=rss'], 3).then(msgs => {
+    utils.getMessagesFromFeed(['http://news.google.it/news?cf=all&hl=it&pz=1&ned=it&geo=Ragusa&output=rss'], 3, 3).then(msgs => {
       session.dialogData.msgs = msgs
       session.endDialogWithResult({
         response: session.dialogData.msgs
