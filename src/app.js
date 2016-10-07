@@ -13,7 +13,8 @@ bot.dialog('/', intents)
 // === INTENTS
 
 const handleResFeed = (session, results) => {
-  console.log(session.message.source)
+  console.log('Message source: ', session.message.source)
+  console.log('News found: ', results.response.length)
   results.response.forEach(res => {
     const replyMessage = new builder.Message(session)
       .text(res)
@@ -45,6 +46,13 @@ intents.matches(/attualità/i, [
 intents.matches(/sport/i, [
   session => {
     session.beginDialog('/news', 'sport')
+  },
+  handleResFeed
+])
+
+intents.matches(/in\s{0,1}evidenza/i, [
+  session => {
+    session.beginDialog('/topnews')
   },
   handleResFeed
 ])
@@ -103,25 +111,8 @@ bot.dialog('/news', [
     if (urls.length === 0) {
       return session.endDialog()
     }
-    const promise = new Promise(resolve => {
-      let msgs = []
-      urls.map(url => {
-        return utils.getSingleFeedFromUrl(url, feed => {
-          return utils.shortUrl(feed.link)
-            .then(shortLink => {
-              const msg = utils.computeMessage(feed, shortLink)
-              msgs = msgs.concat(msg)
-              if (msgs.length === urls.length) {
-                return resolve(msgs)
-              }
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        })
-      })
-    })
-    promise.then(msgs => {
+
+    utils.getMessagesFromFeed(urls, 1, 3).then(msgs => {
       session.dialogData.msgs = msgs
       session.endDialogWithResult({
         response: session.dialogData.msgs
@@ -134,10 +125,24 @@ bot.dialog('/cam', [
   session => {
     const dateNow = new Date()
     const urlImage = 'http://www.comune.ragusa.gov.it/turismo/webcam/_immagini/porto.jpg?tm=' + encodeURIComponent(dateNow)
-    console.log(urlImage)
     session.dialogData.urlImage = urlImage
     session.endDialogWithResult({
       response: session.dialogData.urlImage
+    })
+  }
+])
+
+/**
+  * Google news
+  */
+bot.dialog('/topnews', [
+  session => {
+    session.sendTyping()
+    utils.getMessagesFromFeed(['http://news.google.it/news?cf=all&hl=it&pz=1&ned=it&geo=Ragusa&output=rss'], 3, 3).then(msgs => {
+      session.dialogData.msgs = msgs
+      session.endDialogWithResult({
+        response: session.dialogData.msgs
+      })
     })
   }
 ])

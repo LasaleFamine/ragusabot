@@ -4,7 +4,9 @@ const feed = require('feed-read')
 const strip = require('striptags')
 const google = require('googleapis')
 
-const {Feed} = require('./models.js')
+const {
+  Feed
+} = require('./models.js')
 
 const links = require('./data/links.json')
 
@@ -12,50 +14,86 @@ const messages = {
   default: () => {
     return `
 Posso fornirti le ultimissime notizie sulla provincia di Ragusa.
-Puoi chiedermi di cronaca, cultura, sport, attualità e politica.
+Puoi chiedermi di cronaca, cultura, sport, attualità e politica, oppure inviarmi il testo "in evidenza" per ricevere le notizie del momento.
 Scrivi "cam" per l'immagine live della cam di Marina di Ragusa.
     `
   }
 }
 
-const utils = {
-  getUrls: category => {
-    return links[category] ? links[category] : []
-  },
-  getSingleFeedFromUrl: (url, cb) => {
-    feed(url, (err, articles) => {
-      if (err) {
-        return cb(err)
-      }
-      const article = articles[0]
-      article.content = strip(article.content)
-      cb(new Feed(article))
-    })
-  },
-  shortUrl: url => {
-    const urlshortener = google.urlshortener('v1')
-    const params = {
-      resource: {longUrl: url},
-      key: process.env.GOOGLE_SHORTNER_KEY
+const _stripArticlesContent = articles => {
+  return articles.map(article => {
+    article.content = strip(article.content)
+    return article
+  })
+}
+const _getFeeds = (url, limit, cb) => {
+  feed(url, (err, articles) => {
+    if (err) {
+      return cb(err)
     }
-    return new Promise((resolve, reject) => {
-      urlshortener.url.insert(params, (err, response) => {
-        if (err) {
-          console.log('Encountered error', err)
-          reject(err)
-        } else {
-          console.log('Short url is', response.id)
-          resolve(response.id)
-        }
-      })
+    const stripedArticles = _stripArticlesContent(articles.slice(0, limit))
+    const feeds = stripedArticles.reduce((acc, article) => {
+      return acc.concat(new Feed(article))
+    }, [])
+    cb(feeds)
+  })
+}
+const _shortUrl = url => {
+  const urlshortener = google.urlshortener('v1')
+  const params = {
+    resource: {
+      longUrl: url
+    },
+    key: process.env.GOOGLE_SHORTNER_KEY
+  }
+  return new Promise((resolve, reject) => {
+    urlshortener.url.insert(params, (err, response) => {
+      if (err) {
+        console.log('Encountered error', err)
+        reject(err)
+      } else {
+        console.log('Short url is', response.id)
+        resolve(response.id)
+      }
     })
-  },
-  computeMessage: (feed, shortLink) => {
-    return `
+  })
+}
+const _computeMessage = (feed, shortLink) => {
+  return `
 ${feed.title}
 ${shortLink}
     `
+}
+
+const utils = {
+  getMessagesFromFeed: (urls, limit, msgsLimit) => {
+    return new Promise(resolve => {
+      let msgs = []
+      urls.map(url => {
+        return _getFeeds(url, limit, feeds => {
+          return feeds.map(feed => {
+            return _shortUrl(feed.link)
+              .then(shortLink => {
+                const msg = _computeMessage(feed, shortLink)
+                msgs = msgs.concat(msg)
+                if (msgs.length === msgsLimit) {
+                  return resolve(msgs)
+                }
+              })
+              .catch(err => {
+                console.log('Error short url', err)
+              })
+          })
+        })
+      })
+    })
+  },
+  getUrls: category => {
+    return links[category] ? links[category] : []
   }
 }
 
-module.exports = {messages, utils}
+module.exports = {
+  messages,
+  utils
+}
