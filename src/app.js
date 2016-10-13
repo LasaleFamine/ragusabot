@@ -29,6 +29,13 @@ intents.matches(/cronaca/i, [
   handleResFeed
 ])
 
+intents.matches(/politica/i, [
+  session => {
+    session.beginDialog('/news', 'politica')
+  },
+  handleResFeed
+])
+
 intents.matches(/cultura/i, [
   session => {
     session.beginDialog('/news', 'cultura')
