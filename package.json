@@ -2,7 +2,7 @@
   "name": "ragusabot",
   "version": "1.1.1",
   "description": "Telegram and Facebook bot for getting the latest news of Ragusa",
-  "main": "src/app.js",
+  "main": "src/index.js",
   "engines": {
     "node": "6.2.0"
   },
@@ -12,7 +12,7 @@
     "space": 2
   },
   "scripts": {
-    "start": "cd src && node app.js",
+    "start": "botpress start",
     "test": "xo"
   },
   "repository": {
@@ -31,7 +31,8 @@
   },
   "homepage": "https://github.com/lasalefamine/ragusabot#readme",
   "dependencies": {
-    "botbuilder": "^3.2.3",
+    "botpress": "0.x",
+    "botpress-messenger": "^2.0.6",
     "dropbox": "^2.3.0",
     "feed-read": "0.0.1",
     "googleapis": "^14.0.0",
