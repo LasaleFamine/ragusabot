@@ -58,7 +58,7 @@ src/config.js (require `dotenv`)
 
 require('dotenv').config()
 const builder = require('botbuilder')
-const restify = require('restify')
+const fastify = require('fastify')()
 
 [...]
 ```
