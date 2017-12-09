@@ -1,6 +1,5 @@
 const {builder, bot} = require('./config.js')
 
-// const {user} = require('./models.js')
 const {messages, utils} = require('./utils.js')
 
 //  =========================================================

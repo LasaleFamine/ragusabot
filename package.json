@@ -4,7 +4,7 @@
   "description": "Telegram and Facebook bot for getting the latest news of Ragusa",
   "main": "src/app.js",
   "engines": {
-    "node": "6.2.0"
+    "node": ">=6.2.0"
   },
   "xo": {
     "esnext": true,
@@ -12,7 +12,7 @@
     "space": 2
   },
   "scripts": {
-    "start": "cd src && node app.js",
+    "start": "node src/app",
     "test": "xo"
   },
   "repository": {
@@ -31,15 +31,14 @@
   },
   "homepage": "https://github.com/lasalefamine/ragusabot#readme",
   "dependencies": {
-    "botbuilder": "3.2.3",
+    "botbuilder": "3.13.1",
     "dropbox": "2.3.0",
     "feed-read": "0.0.1",
-    "googleapis": "14.0.0",
-    "restify": "4.1.1",
-    "striptags": "2.1.1"
+    "googleapis": "23.0.0",
+    "restify": "6.3.4",
+    "striptags": "3.1.1"
   },
   "devDependencies": {
-    "dotenv": "^2.0.0",
-    "xo": "^0.16.0"
+    "xo": "0.18.2"
   }
 }
