@@ -4,7 +4,7 @@
   "description": "Telegram and Facebook bot for getting the latest news of Ragusa",
   "main": "src/app.js",
   "engines": {
-    "node": "6.2.0"
+    "node": ">=6.2.0"
   },
   "xo": {
     "esnext": true,
@@ -12,7 +12,7 @@
     "space": 2
   },
   "scripts": {
-    "start": "cd src && node app.js",
+    "start": "node src/app",
     "test": "xo"
   },
   "repository": {
