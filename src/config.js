@@ -1,7 +1,7 @@
 'use strict'
 
 const builder = require('botbuilder')
-const fastify = require('fastify')()
+const restify = require('restify')
 
 const connector = new builder.ChatConnector({
   appId: process.env.MICROSOFT_APP_ID,
@@ -12,13 +12,14 @@ const connector = new builder.ChatConnector({
 // const connector = new builder.ConsoleConnector().listen()
 const bot = new builder.UniversalBot(connector)
 
-//  Setup fastify Server
-fastify.listen(process.env.port || process.env.PORT || 8080, () => {
-  console.log(`${fastify.server.address().host} listening to ${fastify.server.address().port}`)
+//  Setup Restify Server
+const server = restify.createServer()
+server.listen(process.env.port || process.env.PORT || 8080, () => {
+  console.log(`${server.name} listening to ${server.url}`)
   console.log('MS', process.env.MICROSOFT_APP_ID)
   console.log('GO', process.env.GOOGLE_SHORTNER_KEY)
 })
 
-fastify.post('/bot/api/messages', connector.listen)
+server.post('/bot/api/messages', connector.listen())
 
 module.exports = {builder, bot}

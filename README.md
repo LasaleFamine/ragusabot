@@ -80,12 +80,7 @@ If you want to try the bot directly inside the console you can simply modify the
 // require('dotenv').config()
 const builder = require('botbuilder')
 
-//  =========================================================
-//  Bot Setup
-//  =========================================================
-
 const connector = new builder.ConsoleConnector().listen()
-
 const bot = new builder.UniversalBot(connector)
 
 module.exports = {builder, bot}
